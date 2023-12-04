@@ -30,7 +30,7 @@ function Navbar() {
         {/*Desktop Navigation */}
         <div>
           {session?.user ? (
-            <div className="flex gap-3 md:gap-5">
+            <div className="flex gap-3 md:gap-5 items-center justify-center">
               <Link
                 href="/"
                 type="button"
@@ -39,7 +39,7 @@ function Navbar() {
                     router.push("/"); // Redirect to the dashboard page after signing out
                   });
                 }}
-                className="font-sans text-md sm:text-xl xl:text-2xl border-2 py-1 sm:py-2 px-4 md:px-5 rounded-lg bg-[#BBAB8C] border-transparent"
+                className="font-sans text-md sm:text-xl xl:text-xl border-2 py-1 sm:py-2 px-4 md:px-5 rounded-lg bg-[#BBAB8C] border-transparent"
               >
                 Sign Out
               </Link>
@@ -48,7 +48,7 @@ function Navbar() {
                 src={session?.user.image}
                 width={37}
                 height={37}
-                className="rounded-full"
+                className="rounded-full w-[2.8rem] h-[2.8rem]"
                 alt="profile"
               />
             </div>

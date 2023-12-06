@@ -16,7 +16,7 @@ export const GET = async (request, { params }) => {
 
 //Patch
 export const PATCH = async (request, { params }) => {
-  const { prompt, tag } = await request.json();
+  const { title, author, page } = await request.json();
   try {
     await connectToDB();
 
@@ -25,8 +25,9 @@ export const PATCH = async (request, { params }) => {
     if (!existingPrompt) {
       return new Response("Prompt not found", { status: 404 });
     }
-    existingPrompt.prompt = prompt;
-    existingPrompt.tag = tag;
+    existingPrompt.title = title;
+    existingPrompt.author = author;
+    existingPrompt.page = page;
 
     await existingPrompt.save();
 

@@ -1,43 +1,6 @@
 import React from "react";
-import { useState } from "react";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 
-function PopUp({ setPopUp }) {
-  const router = useRouter();
-  const { data: session } = useSession();
-  const [submitting, setIsSubmitting] = useState(false);
-  const [post, setPost] = useState({ title: "", author: "", page: "" });
-  const handlingPopUp = () => {
-    setPopUp(false);
-  };
-
-  const createPrompt = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    try {
-      const response = await fetch("/api/book/new", {
-        method: "POST",
-        body: JSON.stringify({
-          userId: session?.user.id,
-          title: post.title,
-          author: post.author,
-          page: post.page,
-        }),
-      });
-
-      if (response.ok) {
-        setPopUp(false);
-        window.location.reload();
-      }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
+function Update() {
   return (
     <div class="fixed h-full w-full inset-0 bg-black bg-opacity-80 z-100">
       <div
@@ -45,7 +8,7 @@ function PopUp({ setPopUp }) {
         class="absolute flex-col rounded-xl border-4 border-[#FAEED1] space-y-5 bg-[#DED0B6] h-[30rem] w-[22rem] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 "
       >
         <h1 class="flex relative items-center justify-center mt-8 mb-[2.5rem] text-4xl font-bold">
-          Add New Book
+          Editing Book
           <i
             className="bx bx-minus absolute -top-[3rem] -right-[1rem] text-[#FAEED1] rounded-[1rem] text-4xl bg-[#BBAB8C] hover:cursor-pointer"
             onClick={handlingPopUp}
@@ -97,4 +60,4 @@ function PopUp({ setPopUp }) {
   );
 }
 
-export default PopUp;
+export default Update;

@@ -1,9 +1,41 @@
 import React from "react";
+import { useState } from "react";
+import { useSession } from "next-auth/react";
 
 function PopUp({ setPopUp }) {
+  const { data: session } = useSession();
+  const [submitting, setIsSubmitting] = useState(false);
+  const [post, setPost] = useState({ title: "", author: "", page: "" });
   const handlingPopUp = () => {
     setPopUp(false);
   };
+
+  const createPrompt = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("/api/book/new", {
+        method: "POST",
+        body: JSON.stringify({
+          userId: session?.user.id,
+          title: post.title,
+
+          author: post.author,
+          page: post.page,
+        }),
+      });
+
+      if (response.ok) {
+        setPopUp(false);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div class="fixed h-full w-full inset-0 bg-black bg-opacity-80 z-100">
       <div
@@ -17,44 +49,47 @@ function PopUp({ setPopUp }) {
             onClick={handlingPopUp}
           ></i>
         </h1>
-        <div class=" flex justify-center">
-          <input
-            type="text"
-            placeholder="Title"
-            class="text-xl py-2 my-1 pl-1 rounded-md w-72 jsTitle bg-[#FDF7E4]"
-          />
-        </div>
-        <div class="flex justify-center">
-          <input
-            type="text"
-            placeholder="Author"
-            class="text-xl py-2 my-1 pl-1 rounded-md w-72 bg-[#FDF7E4]"
-          />
-        </div>
-        <div class="flex justify-center">
-          <input
-            type="number"
-            placeholder="Pages"
-            class="text-xl py-2 pl-1 my-1 rounded-md w-72 bg-[#FDF7E4]"
-          />
-        </div>
-        <div class="flex items-center justify-center">
-          <p class="text-xl font-medium py-2"> Have you read it?</p>
-          <div class="pt-1 pl-1 ">
+        <form onSubmit={createPrompt} className="flex  flex-col gap-7">
+          <div class=" flex justify-center">
             <input
-              type="checkbox"
-              value="Yes"
-              id="readBook"
-              className="bg-[#FDF7E4]"
+              required
+              value={post.title}
+              onChange={(e) => setPost({ ...post, title: e.target.value })}
+              type="text"
+              placeholder="Title"
+              class="text-xl py-2 my-1 pl-1 rounded-md w-72 jsTitle bg-[#FDF7E4]"
             />
           </div>
-        </div>
-        <div class="flex items-center justify-center">
-          <button class="mt-1 mb-6 bg-[#BBAB8C] w-72 rounded-md py-3 text-xl font-medium">
-            {" "}
-            Submit{" "}
-          </button>
-        </div>
+          <div class="flex justify-center">
+            <input
+              type="text"
+              placeholder="Author"
+              value={post.author}
+              onChange={(e) => setPost({ ...post, author: e.target.value })}
+              class="text-xl py-2 my-1 pl-1 rounded-md w-72 bg-[#FDF7E4]"
+            />
+          </div>
+          <div class="flex justify-center">
+            <input
+              type="number"
+              value={post.page}
+              onChange={(e) => setPost({ ...post, page: e.target.value })}
+              placeholder="Pages"
+              class="text-xl py-2 pl-1 my-1 rounded-md w-72 bg-[#FDF7E4]"
+            />
+          </div>
+
+          <div class="flex items-center justify-center">
+            <button
+              type="submit"
+              disabled={submitting}
+              class="mt-1 mb-6 bg-[#BBAB8C] w-72 rounded-md py-3 text-xl font-medium"
+            >
+              {" "}
+              {submitting ? "Submitting" : "Submit"}{" "}
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );

@@ -1,17 +1,21 @@
 import { Schema, model, models } from "mongoose";
 
 const PromptSchema = new Schema({
-  title: {
+  creator: {
     type: Schema.Types.ObjectId,
+    ref: "User",
+  },
+  title: {
+    type: String,
     required: [true, "Title is required."],
   },
   author: {
     type: String,
-    required: [true, "Prompt is required."],
+    required: [true, "Author is required."],
   },
   page: {
     type: Number,
-    required: [true, "Tag is required."],
+    required: [true, "Page is required."],
   },
 });
 

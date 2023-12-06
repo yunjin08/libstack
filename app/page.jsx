@@ -1,14 +1,32 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSession } from "next-auth/react";
 import PopUp from "@/components/PopUp";
+import Card from "@/components/Card";
 
 function Page() {
+  const { data: session } = useSession();
+  const [allBooks, setAllBooks] = useState([]);
   const [popUp, setPopUp] = useState(false);
-  const [post, isPost] = useState(false);
 
   const handlingPopUp = () => {
     setPopUp(true);
   };
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await fetch(`/api/users/${session?.user.id}/posts`);
+
+        const data = await response.json();
+
+        setAllBooks(data);
+      } catch (error) {
+        console.log("Error fetching data: ", error);
+      }
+    };
+    if (session?.user.id) fetchPosts();
+  }, [session?.user.id]);
 
   return (
     <section className="bg-[#FDF7E4]">
@@ -33,8 +51,12 @@ function Page() {
           className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 space-y-3 jsContent mb-12 "
         ></div>
       </div>
-      {post ? (
-        <p className="text-xl">There is a post</p>
+      {allBooks ? (
+        <div className="grid grid-cols-3">
+          {allBooks.map((books) => (
+            <Card key={books._id} data={books} />
+          ))}
+        </div>
       ) : (
         <p className="text-xl">There is no post</p>
       )}

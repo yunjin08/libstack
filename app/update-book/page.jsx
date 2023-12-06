@@ -57,7 +57,7 @@ const EditPrompt = () => {
       <div class="fixed h-full w-full inset-0 bg-black bg-opacity-80 z-100">
         <div
           id="popup"
-          class="absolute flex-col rounded-xl border-4 border-[#FAEED1] space-y-5 bg-[#DED0B6] h-[30rem] w-[22rem] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 "
+          class="absolute flex-col rounded-xl border-4 border-[#FAEED1] space-y-5 bg-[#DED0B6] h-[30rem] w-[20rem] md:w-[22rem] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 "
         >
           <h1 class="flex relative items-center justify-center mt-8 mb-[2.5rem] text-4xl font-bold">
             Editing Book

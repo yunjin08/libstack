@@ -4,14 +4,16 @@ import { useSession } from "next-auth/react";
 import PopUp from "@/components/PopUp";
 import Card from "@/components/Card";
 import { useRouter } from "next/navigation";
-import Update from "@/components/Update";
+import Image from "next/image";
 
 function Page() {
   const router = useRouter();
   const { data: session } = useSession();
   const [allBooks, setAllBooks] = useState([]);
   const [popUp, setPopUp] = useState(false);
+  const [isDefault, toNotDefault] = useState(true);
   const [update, setUpdate] = useState(false);
+  const [isLogin, toNotLogin] = useState(true);
 
   const handlingPopUp = () => {
     setPopUp(true);
@@ -26,7 +28,7 @@ function Page() {
         const response = await fetch(`/api/user/${session?.user.id}/book`);
 
         const data = await response.json();
-
+        toNotDefault(false);
         setAllBooks(data);
       } catch (error) {
         console.log("Error fetching data: ", error);
@@ -72,12 +74,18 @@ function Page() {
           className="container w-full h-full flex items-center justify-center mx-auto"
         >
           <div>
-            <button
-              className="text-xl sm:text-2xl md:text-3xl 2xl:text-4xl font-bold js-button"
-              onClick={handlingPopUp}
-            >
-              + Add Book{" "}
-            </button>
+            {isLogin ? (
+              <div className="text-2xl 2xl:text-2xl font-bold js-button">
+                Login to add a Book
+              </div>
+            ) : (
+              <button
+                className="text-3xl 2xl:text-4xl font-bold js-button"
+                onClick={handlingPopUp}
+              >
+                + Add Book
+              </button>
+            )}
           </div>
         </div>
         <div
@@ -85,8 +93,9 @@ function Page() {
           className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 space-y-3 jsContent mb-12 "
         ></div>
       </div>
-      {allBooks ? (
-        <div className="grid grid-cols-3 z-0 gap-y-10">
+      {console.log(allBooks)}
+      {allBooks && (
+        <div className="grid grid-cols-1 bld:grid-cols-2 z-0 2xl:grid-cols-3 gap-y-10">
           {allBooks.map((books) => (
             <Card
               key={books._id}
@@ -97,9 +106,35 @@ function Page() {
             />
           ))}
         </div>
-      ) : (
-        <p className="text-xl">There is no post</p>
       )}
+      {isDefault && (
+        <div className="flex w-full items-center justify-center flex-col-reverse xl:flex-row">
+          <Image src="/books.jpg" alt="book" width={680} height={680} />
+
+          <div className=" xl:w-[40%] xl:pl-10 w-[80%] flex flex-col h-full item-center justify-center mb-10 xl:mb-0">
+            <h1 className=" text-[1.8rem] md:text-[2rem] 2xl:text-4xl font-bold  text-center  mb-5">
+              Library Stack
+            </h1>
+            <p className="text-xl text-justify w-full indent-5">
+              Welcome to our specialized reading management website, designed to
+              serve as your personal hub for organizing and tracking your
+              reading journey. Tailored for book enthusiasts, this platform
+              empowers you to seamlessly store and manage details about the
+              books in your collection.
+              <br className="indet" />
+              <p className="indent-5 pt-5">
+                With a user-friendly interface, our website allows you to input
+                essential information such as title, author, and number of pages
+                for each book, ensuring a comprehensive catalog of your literary
+                treasures. Keep a watchful eye on your reading list, track your
+                progress effortlessly, and never lose sight of the captivating
+                stories waiting to be explored.
+              </p>
+            </p>
+          </div>
+        </div>
+      )}
+
       {/*Pop Up for Entry */}
       {popUp && <PopUp setPopUp={setPopUp} />}
     </section>

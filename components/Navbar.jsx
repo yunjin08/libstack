@@ -23,7 +23,7 @@ function Navbar() {
     <div id="head" className="border-b-[#DED0B6] border-b-2 bg-[#BBAB8C]">
       <nav className="px-[6%] mx-auto flex h-28 items-center justify-between">
         <div>
-          <h1 className="font-serif text-3xl sm:text-4xl xl:text-5xl font-bold">
+          <h1 className="font-serif text-4xl sm:text-5xl xl:text-6xl font-bold">
             library
           </h1>
         </div>
@@ -39,7 +39,7 @@ function Navbar() {
                     router.push("/"); // Redirect to the dashboard page after signing out
                   });
                 }}
-                className="font-sans text-md sm:text-xl xl:text-xl border-2 py-1 font-semibold sm:py-2 px-4 md:px-5 rounded-lg bg-[#DED0B6] border-transparent"
+                className="font-sans text-xl sm:text-2xl xl:text-2xl border-2 py-1 font-semibold sm:py-2 px-4 md:px-5 rounded-lg bg-[#DED0B6] border-transparent"
               >
                 Sign Out
               </Link>
@@ -62,7 +62,7 @@ function Navbar() {
                     onClick={() => {
                       signIn(provider.id);
                     }}
-                    className="font-sans text-md sm:text-xl xl:text-2xl border-2 py-1 sm:py-2 px-4 md:px-5 rounded-lg bg-[#BBAB8C] border-transparent"
+                    className="font-sans text-xl sm:text-2xl xl:text-2xl border-2 py-1 font-semibold sm:py-2 px-4 md:px-5 rounded-lg bg-[#DED0B6] border-transparent"
                   >
                     Sign in
                   </button>

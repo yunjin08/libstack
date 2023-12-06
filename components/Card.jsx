@@ -1,18 +1,28 @@
 import React from "react";
 
-function Card() {
+function Card({ data }) {
   return (
-    <div class="flex flex-col items-center justify-center">
-      <div class="flex flex-col items-center justify-center bg-white space-y-4 mt-4 rounded-lg">
-        <div class="text-2xl font-semibold pt-5">${book.title}</div>
-        <div class="text-2xl font-semibold"> ${book.author}</div>
-        <div class="text-2xl font-semibold"> ${book.page} Pages</div>
-        <div class="px-6"></div>
-        <div class="pb-5 px-6">
-          <button
-            class="bg-gray-300 w-22rem text-2xl font-medium rounded-md py-4 jsRemove"
-            onclick="removeBook(${i})"
-          >
+    <div className="flex flex-col items-center justify-center w-full">
+      <div className="absolute bottom-[13.5rem] left-[11rem]    w-[23rem] h-[24rem] bg-[#FAEED1]  rounded-xl z-1" />
+
+      <div className="flex relative  flex-col text-[#333333]  items-center  w-[23rem] h-[24rem] bg-[#DED0B6] rounded-xl">
+        <h1 className="text-4xl font-bold mt-6">Book</h1>
+        <div className="flex flex-col text-[#333333] w-full mt-3 items-center  space-y-4 ">
+          <div className="text-[1.5rem] font-semibold pt-5">{`Title:${" "}${
+            data.title
+          }`}</div>
+          <div className="text-[1.5rem] font-semibold">
+            {" "}
+            {`Author:${" "}${data.author}`}
+          </div>
+          <div className="text-[1.5rem] font-semibold">
+            {" "}
+            {`Page:${" "}${data.page}`} Pages
+          </div>
+        </div>
+        <div className="px-6"></div>
+        <div className="pb-5 w-full flex items-center justify-center">
+          <button className="absolute bottom-10 bg-[#BBAB8C] w-[85%] text-2xl font-medium rounded-md py-4 ">
             Remove
           </button>
         </div>

@@ -20,7 +20,7 @@ function Navbar() {
   }, []);
 
   return (
-    <div id="head" className="border-b-[#DED0B6] border-2 bg-[#DED0B6]">
+    <div id="head" className="border-b-[#DED0B6] border-b-2 bg-[#BBAB8C]">
       <nav className="px-[6%] mx-auto flex h-28 items-center justify-between">
         <div>
           <h1 className="font-serif text-3xl sm:text-4xl xl:text-5xl font-bold">

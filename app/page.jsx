@@ -30,8 +30,6 @@ function Page() {
 
   return (
     <section className="bg-[#FDF7E4]">
-      {/*Pop Up for Entry */}
-      {popUp && <PopUp setPopUp={setPopUp} />}
       <div className="w-full h-full ">
         <div
           id="add"
@@ -52,7 +50,7 @@ function Page() {
         ></div>
       </div>
       {allBooks ? (
-        <div className="grid grid-cols-3">
+        <div className="grid grid-cols-3 z-0 gap-y-10">
           {allBooks.map((books) => (
             <Card key={books._id} data={books} />
           ))}
@@ -60,6 +58,8 @@ function Page() {
       ) : (
         <p className="text-xl">There is no post</p>
       )}
+      {/*Pop Up for Entry */}
+      {popUp && <PopUp setPopUp={setPopUp} />}
     </section>
   );
 }

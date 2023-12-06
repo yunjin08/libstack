@@ -39,7 +39,7 @@ function Navbar() {
                     router.push("/"); // Redirect to the dashboard page after signing out
                   });
                 }}
-                className="font-sans text-md sm:text-xl xl:text-xl border-2 py-1 sm:py-2 px-4 md:px-5 rounded-lg bg-[#BBAB8C] border-transparent"
+                className="font-sans text-md sm:text-xl xl:text-xl border-2 py-1 font-semibold sm:py-2 px-4 md:px-5 rounded-lg bg-[#DED0B6] border-transparent"
               >
                 Sign Out
               </Link>

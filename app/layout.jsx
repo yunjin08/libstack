@@ -17,7 +17,7 @@ function RootLayout({ children }) {
           rel="stylesheet"
         />
       </head>
-      <body>
+      <body className="bg-[#FDF7E4]">
         <Provider>
           <main className="app">
             <Navbar />

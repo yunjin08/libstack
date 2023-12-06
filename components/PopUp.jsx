@@ -1,8 +1,10 @@
 import React from "react";
 import { useState } from "react";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 function PopUp({ setPopUp }) {
+  const router = useRouter();
   const { data: session } = useSession();
   const [submitting, setIsSubmitting] = useState(false);
   const [post, setPost] = useState({ title: "", author: "", page: "" });
@@ -28,6 +30,7 @@ function PopUp({ setPopUp }) {
 
       if (response.ok) {
         setPopUp(false);
+        window.location.reload();
       }
     } catch (error) {
       console.log(error);

@@ -1,6 +1,6 @@
 import React from "react";
 
-function Card({ data }) {
+function Card({ data, handleDelete }) {
   return (
     <div className="flex flex-col items-center justify-center w-full">
       <div className="flex relative">
@@ -23,7 +23,10 @@ function Card({ data }) {
           </div>
           <div className="px-6"></div>
           <div className="pb-5 w-full flex items-center justify-center">
-            <button className="absolute bottom-10 bg-[#BBAB8C] w-[85%] text-2xl font-medium rounded-md py-4 ">
+            <button
+              className="absolute bottom-10 bg-[#BBAB8C] w-[85%] text-2xl font-medium rounded-md py-4 "
+              onClick={handleDelete}
+            >
               Remove
             </button>
           </div>

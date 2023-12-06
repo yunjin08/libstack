@@ -28,6 +28,24 @@ function Page() {
     if (session?.user.id) fetchPosts();
   }, [session?.user.id]);
 
+  const handleDelete = async (post) => {
+    const hasConfirmed = confirm("Are you sure you want to delete this post?");
+
+    if (hasConfirmed) {
+      try {
+        await fetch(`/api/book/${post._id.toString()}`, {
+          method: "DELETE",
+        });
+        const filteredPosts = allBooks.filter(
+          (curpost) => curpost._id !== post._id
+        );
+        setAllBooks(filteredPosts);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
   return (
     <section className="bg-[#FDF7E4]">
       <div className="w-full h-full ">
@@ -52,7 +70,7 @@ function Page() {
       {allBooks ? (
         <div className="grid grid-cols-3 z-0 gap-y-10">
           {allBooks.map((books) => (
-            <Card key={books._id} data={books} />
+            <Card key={books._id} data={books} handleDelete={handleDelete} />
           ))}
         </div>
       ) : (

@@ -37,24 +37,6 @@ const CreatePrompt = ({ fetchPosts }) => {
     }
   };
 
-  const handleDelete = async (post) => {
-    const hasConfirmed = confirm("Are you sure you want to delete this post?");
-
-    if (hasConfirmed) {
-      try {
-        await fetch(`/api/book/${post._id.toString()}`, {
-          method: "DELETE",
-        });
-        const filteredPosts = posts.filter(
-          (curpost) => curpost._id !== post._id
-        );
-        setPosts(filteredPosts);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  };
-
   return (
     <PopUp
       type="Create"

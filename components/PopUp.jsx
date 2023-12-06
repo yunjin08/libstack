@@ -8,6 +8,7 @@ function PopUp({ setPopUp }) {
   const { data: session } = useSession();
   const [submitting, setIsSubmitting] = useState(false);
   const [post, setPost] = useState({ title: "", author: "", page: "" });
+
   const handlingPopUp = () => {
     setPopUp(false);
   };
@@ -59,29 +60,31 @@ function PopUp({ setPopUp }) {
               onChange={(e) => setPost({ ...post, title: e.target.value })}
               type="text"
               placeholder="Title"
-              class="text-xl py-2 my-1 pl-1 rounded-md w-72 jsTitle bg-[#FDF7E4]"
+              class="text-lg py-2 my-1 pl-1 rounded-md w-72 jsTitle bg-[#FDF7E4]"
             />
           </div>
-          <div class="flex justify-center">
+          <div className="flex justify-center">
             <input
               type="text"
+              required
               placeholder="Author"
               value={post.author}
               onChange={(e) => setPost({ ...post, author: e.target.value })}
-              class="text-xl py-2 my-1 pl-1 rounded-md w-72 bg-[#FDF7E4]"
+              class="text-lg py-2 my-1 pl-1 rounded-md w-72 bg-[#FDF7E4]"
             />
           </div>
-          <div class="flex justify-center">
+          <div className="flex justify-center">
             <input
+              required
               type="number"
               value={post.page}
               onChange={(e) => setPost({ ...post, page: e.target.value })}
               placeholder="Pages"
-              class="text-xl py-2 pl-1 my-1 rounded-md w-72 bg-[#FDF7E4]"
+              class="text-lg py-2 pl-1 my-1 rounded-md w-72 bg-[#FDF7E4]"
             />
           </div>
 
-          <div class="flex items-center justify-center">
+          <div className="flex items-center justify-center">
             <button
               type="submit"
               disabled={submitting}

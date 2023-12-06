@@ -61,7 +61,10 @@ const EditPrompt = () => {
         >
           <h1 class="flex relative items-center justify-center mt-8 mb-[2.5rem] text-4xl font-bold">
             Editing Book
-            <i className="bx bx-minus absolute -top-[3rem] -right-[1rem] text-[#FAEED1] rounded-[1rem] text-4xl bg-[#BBAB8C] hover:cursor-pointer"></i>
+            <i
+              className="bx bx-minus absolute -top-[3rem] -right-[1rem] text-[#FAEED1] rounded-[1rem] text-4xl bg-[#BBAB8C] hover:cursor-pointer"
+              onClick={() => router.push("/")}
+            ></i>
           </h1>
           <form onSubmit={UpdatePrompt} className="flex  flex-col gap-7">
             <div class=" flex justify-center">
@@ -71,7 +74,7 @@ const EditPrompt = () => {
                 onChange={(e) => setPost({ ...post, title: e.target.value })}
                 type="text"
                 placeholder="Title"
-                class="text-xl py-2 my-1 pl-1 rounded-md w-72 jsTitle bg-[#FDF7E4]"
+                class="text-lg py-2 my-1 pl-1 rounded-md w-72 jsTitle bg-[#FDF7E4]"
               />
             </div>
             <div class="flex justify-center">
@@ -79,8 +82,9 @@ const EditPrompt = () => {
                 type="text"
                 placeholder="Author"
                 value={post.author}
+                required
                 onChange={(e) => setPost({ ...post, author: e.target.value })}
-                class="text-xl py-2 my-1 pl-1 rounded-md w-72 bg-[#FDF7E4]"
+                class="text-lg py-2 my-1 pl-1 rounded-md w-72 bg-[#FDF7E4]"
               />
             </div>
             <div class="flex justify-center">
@@ -89,7 +93,8 @@ const EditPrompt = () => {
                 value={post.page}
                 onChange={(e) => setPost({ ...post, page: e.target.value })}
                 placeholder="Pages"
-                class="text-xl py-2 pl-1 my-1 rounded-md w-72 bg-[#FDF7E4]"
+                required
+                class="text-lg py-2 pl-1 my-1 rounded-md w-72 bg-[#FDF7E4]"
               />
             </div>
 

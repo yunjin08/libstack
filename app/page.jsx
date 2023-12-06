@@ -13,7 +13,6 @@ function Page() {
   const [popUp, setPopUp] = useState(false);
   const [isDefault, toNotDefault] = useState(true);
   const [update, setUpdate] = useState(false);
-  const [isLogin, toNotLogin] = useState(true);
 
   const handlingPopUp = () => {
     setPopUp(true);
@@ -74,7 +73,7 @@ function Page() {
           className="container w-full h-full flex items-center justify-center mx-auto"
         >
           <div>
-            {isLogin ? (
+            {isDefault ? (
               <div className="text-2xl 2xl:text-2xl font-bold js-button">
                 Login to add a Book
               </div>
@@ -94,20 +93,27 @@ function Page() {
         ></div>
       </div>
       {console.log(allBooks)}
-      {allBooks && (
-        <div className="grid grid-cols-1 bld:grid-cols-2 z-0 2xl:grid-cols-3 gap-y-10">
-          {allBooks.map((books) => (
-            <Card
-              key={books._id}
-              data={books}
-              handleDelete={handleDelete}
-              handleEdit={handleEdit}
-              setUpdate={handlingUpdate}
-            />
-          ))}
+      {session && (
+        <div>
+          {allBooks && allBooks.length > 0 ? (
+            <div className="grid grid-cols-1 bld:grid-cols-2 z-0 2xl:grid-cols-3 gap-y-10">
+              {allBooks.map((books) => (
+                <Card
+                  key={books._id}
+                  data={books}
+                  handleDelete={handleDelete}
+                  handleEdit={handleEdit}
+                  setUpdate={handlingUpdate}
+                />
+              ))}
+            </div>
+          ) : (
+            <p className="text-xl text-black">No books available, add now!</p>
+          )}
         </div>
       )}
-      {isDefault && (
+
+      {!session && (
         <div className="flex w-full items-center justify-center flex-col-reverse xl:flex-row">
           <Image src="/books.jpg" alt="book" width={680} height={680} />
 
@@ -121,15 +127,14 @@ function Page() {
               reading journey. Tailored for book enthusiasts, this platform
               empowers you to seamlessly store and manage details about the
               books in your collection.
-              <br className="indet" />
-              <p className="indent-5 pt-5">
-                With a user-friendly interface, our website allows you to input
-                essential information such as title, author, and number of pages
-                for each book, ensuring a comprehensive catalog of your literary
-                treasures. Keep a watchful eye on your reading list, track your
-                progress effortlessly, and never lose sight of the captivating
-                stories waiting to be explored.
-              </p>
+            </p>
+            <p className="indent-5 text-xl text-justify pt-5">
+              With a user-friendly interface, our website allows you to input
+              essential information such as title, author, and number of pages
+              for each book, ensuring a comprehensive catalog of your literary
+              treasures. Keep a watchful eye on your reading list, track your
+              progress effortlessly, and never lose sight of the captivating
+              stories waiting to be explored.
             </p>
           </div>
         </div>

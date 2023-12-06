@@ -36,7 +36,7 @@ function Navbar() {
                 type="button"
                 onClick={() => {
                   signOut({ redirect: false }).then(() => {
-                    router.push("/"); // Redirect to the dashboard page after signing out
+                    window.location.reload(); // Redirect to the dashboard page after signing out
                   });
                 }}
                 className="font-sans text-xl sm:text-2xl xl:text-2xl border-2 py-1 font-semibold sm:py-2 px-4 md:px-5 rounded-lg bg-[#DED0B6] border-transparent"
